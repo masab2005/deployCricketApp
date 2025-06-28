@@ -128,7 +128,7 @@ function Leaderboard() {
                       {/* User Info */}
                       <div>
                         <div className="font-semibold text-lg flex items-center">
-                          <span className="text-white">{user.username || `Player ${index + 1}`}</span>
+                          <span className="text-white">{user.username ? (user.username.length > 5 ? user.username.substring(0, 3) + "..." : user.username) : `Player ${index + 1}`}</span>
                           {user.$id === currentUserId && (
                             <span className="ml-2 text-xs bg-cyan-500/80 text-white px-2 py-0.5 rounded-full">You</span>
                           )}
