@@ -5,7 +5,8 @@ function GameWrapper() {
   const [gameKey, setGameKey] = useState(0);
 
   const handleNext = () => {
-    setGameKey(prev => prev + 1); // forces Game to reset
+    localStorage.removeItem('gameState');
+    setGameKey(prev => prev + 1); 
   };
 
   return <Game key={gameKey} onNext={handleNext} />;

@@ -69,7 +69,12 @@ useEffect(() => {
             setCount(parsedState.count || 6);
           } else {
             localStorage.removeItem('gameState');
+            setRevealedHints([]);
+            setCount(6);
           }
+        } else {
+          setRevealedHints([]);
+          setCount(6);
         }
       } else {
         setLoading(false);
@@ -86,7 +91,7 @@ useEffect(() => {
   if (userGameData && userGameData.currentIndex !== undefined) {
     fetchPlayer();
   }
-}, []);
+}, [userGameData?.currentIndex, navigate]);
 
   
 
