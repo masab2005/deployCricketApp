@@ -14,6 +14,8 @@ function Result({ isCorrect, correctAnswer, currentScore, imageUrl, onNext }) {
   const [error, setError] = useState(null);
   
   useEffect(() => {
+    localStorage.removeItem('gameState');
+    
     async function updateUserScoreAndIndex() {
       try {
         setLoading(true);
