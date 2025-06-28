@@ -44,7 +44,7 @@ function Game({onNext}) {
       };
       localStorage.setItem('gameState', JSON.stringify(gameState));
     }
-  }, [revealedHints, count, userGameData?.currentIndex, correctAnswer]);
+  }, [revealedHints, count, correctAnswer]);
 
 const [error, setError] = useState(null);
 
@@ -64,12 +64,10 @@ useEffect(() => {
         const savedState = localStorage.getItem('gameState');
         if (savedState) {
           const parsedState = JSON.parse(savedState);
-          // Only use saved state if it matches the current player index
           if (parsedState.playerIndex === userGameData.currentIndex) {
             setRevealedHints(parsedState.revealedHints || []);
             setCount(parsedState.count || 6);
           } else {
-            // Clear localStorage if it's for a different player
             localStorage.removeItem('gameState');
             setRevealedHints([]);
             setCount(6);
