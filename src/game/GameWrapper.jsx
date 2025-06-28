@@ -5,7 +5,6 @@ function GameWrapper() {
   const [gameKey, setGameKey] = useState(0);
 
   const handleNext = () => {
-    // Clear localStorage to prevent state persistence between players
     localStorage.removeItem('gameState');
     setGameKey(prev => prev + 1); 
   };

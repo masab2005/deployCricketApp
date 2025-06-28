@@ -91,7 +91,7 @@ useEffect(() => {
   if (userGameData && userGameData.currentIndex !== undefined) {
     fetchPlayer();
   }
-}, [userGameData?.currentIndex, navigate]);
+}, [userGameData?.currentIndex]);
 
   
 
