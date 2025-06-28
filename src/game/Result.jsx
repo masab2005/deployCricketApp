@@ -12,18 +12,14 @@ function Result({ isCorrect, correctAnswer, currentScore, imageUrl, onNext }) {
   const currentIndex = (userGameData?.currentIndex || 0) + 1;
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [scoreUpdated, setScoreUpdated] = useState(false);
   
   useEffect(() => {
     async function updateUserScoreAndIndex() {
       try {
-        if (scoreUpdated) return; // Prevent multiple updates
-        
         setLoading(true);
         setError(null);
-        const updatedUser = await service.updateUserScore(userData.$id, existingScore, currentScore, currentIndex);
+        const updatedUser = await service.updateUserScore(userData.$id,existingScore, currentScore, currentIndex);
         dispatch(updateUserData({ userGameData: updatedUser }));
-        setScoreUpdated(true);
       } catch (error) {
         setError("Failed to save your score. Your progress may not be updated.");
       } finally {
@@ -31,16 +27,10 @@ function Result({ isCorrect, correctAnswer, currentScore, imageUrl, onNext }) {
       }
     }
 
-    if (userData?.$id && !scoreUpdated) {
+    if (userData?.$id) {
       updateUserScoreAndIndex();
     }
-  }, [userData?.$id, existingScore, currentScore, currentIndex, dispatch, scoreUpdated]);
-
-  const handleNextClick = () => {
-    // Reset the state before moving to next player
-    setScoreUpdated(false);
-    onNext();
-  };
+  }, []);
 
   if(loading) return <LoadingSpinner/>
 
@@ -127,7 +117,7 @@ function Result({ isCorrect, correctAnswer, currentScore, imageUrl, onNext }) {
           </div>
           
           <button 
-            onClick={handleNextClick}
+            onClick={onNext}
             className="w-full mt-8 py-3 px-6 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg shadow-lg transition-colors"
           >
             Next Player
