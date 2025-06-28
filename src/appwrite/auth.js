@@ -28,7 +28,16 @@ class AuthService {
 
   async login(email, password) {
     try {
-      return await this.account.createEmailPasswordSession(email, password);
+      // First ensure no active sessions exist
+      try {
+        await this.logout();
+      } catch (logoutError) {
+        console.log("No active session to log out from");
+      }
+      
+      // Create a new session with proper credentials
+      const session = await this.account.createEmailPasswordSession(email, password);
+      return session;
     } catch (error) {
       console.error("AuthService :: login error", error);
       throw error;
@@ -46,14 +55,13 @@ class AuthService {
 
   async logout() {
     try {
-      await this.account.deleteSessions();
+      return await this.account.deleteSessions();
     } catch (error) {
       console.error("AuthService :: logout error", error);
-      throw error; // Propagate the error to be handled by the caller
+      // Don't throw the error as it might be that there's no active session
+      return null;
     }
   }
-
-
 }
 
 const authService = new AuthService();

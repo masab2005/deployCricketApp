@@ -46,17 +46,20 @@ function Login(){
     setError("");
     setLoading(true);
     try{
-        await authService.logout();
         const { email, password } = data;
         const session = await authService.login(email, password);
 
         if(session){
+          await new Promise(resolve => setTimeout(resolve, 500));
+          
           const userData = await authService.getCurrentUser();
           if(userData){ 
                dispatch(authLogin({ userData : userData }));
                const gameData =  await service.getUserInfo(userData.$id);
                dispatch(updateUserData({ userGameData : gameData }));
                navigate(from); 
+          } else {
+            setError("Failed to get user data. Please try again.");
           }
         }
     } catch(error){
