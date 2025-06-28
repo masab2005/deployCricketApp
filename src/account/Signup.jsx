@@ -93,7 +93,7 @@ function Signup() {
             )}
             
             <form onSubmit={handleSubmit(create)}>
-              <div>
+              {/* <div>
                 <label htmlFor="name" className="block text-sm font-medium text-slate-300">Name</label>
                 <div className="mt-1 relative rounded-md shadow-sm">
                   <input
@@ -117,22 +117,22 @@ function Signup() {
                 {errors.name && (
                   <p className="mt-1 text-xs text-red-400">{errors.name.message}</p>
                 )}
-              </div>
+              </div> */}
 
               <div className="mt-6">
-                <label htmlFor="username" className="block text-sm font-medium text-slate-300">Username</label>
+                <label htmlFor="name" className="block text-sm font-medium text-slate-300">Username</label>
                 <div className="mt-1 relative rounded-md shadow-sm">
                   <input 
-                    id="username" 
-                    name="username" 
+                    id="name" 
+                    name="name" 
                     placeholder="john" 
                     type="text" 
-                    {...register('username', { 
+                    {...register('name', { 
                       required: "Username is required" 
                     })}
-                    className={`appearance-none block w-full px-4 py-3 border ${errors.username ? 'border-red-500' : 'border-slate-600/50'} bg-slate-700/50 rounded-xl placeholder-slate-400 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500/30 focus:border-cyan-500/70 transition-colors sm:text-sm`}
+                    className={`appearance-none block w-full px-4 py-3 border ${errors.name ? 'border-red-500' : 'border-slate-600/50'} bg-slate-700/50 rounded-xl placeholder-slate-400 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500/30 focus:border-cyan-500/70 transition-colors sm:text-sm`}
                   />
-                  {errors.username && (
+                  {errors.name && (
                     <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                       <svg className="h-5 w-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd"></path>
@@ -140,8 +140,8 @@ function Signup() {
                     </div>
                   )}
                 </div>
-                {errors.username && (
-                  <p className="mt-1 text-xs text-red-400">{errors.username.message}</p>
+                {errors.name && (
+                  <p className="mt-1 text-xs text-red-400">{errors.name.message}</p>
                 )}
               </div>
 
